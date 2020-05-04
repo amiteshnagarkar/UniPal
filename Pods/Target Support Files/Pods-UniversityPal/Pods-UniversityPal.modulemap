@@ -1,0 +1,6 @@
+framework module Pods_UniversityPal {
+  umbrella header "Pods-UniversityPal-umbrella.h"
+
+  export *
+  module * { export * }
+}
