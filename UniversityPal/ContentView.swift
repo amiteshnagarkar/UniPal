@@ -11,29 +11,36 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         
+        
+        //TODO: Need to fix the constraints from splash to initial screen.
         ZStack{
-            Color(#colorLiteral(red: 0.3605145216, green: 0.3163693547, blue: 0.8708179593, alpha: 1))
-                .edgesIgnoringSafeArea(.all)
+            Color(#colorLiteral(red: 0.3605145216, green: 0.3163693547, blue: 0.8708179593, alpha: 1)) .edgesIgnoringSafeArea(.all)
             
             VStack {
-            VStack (alignment: .center){
+                VStack {
             Image ("logo")
                 .resizable()
-                .aspectRatio( contentMode: .fit)
+                //.aspectRatio( contentMode: .fit)
+                //.padding(.horizontal, 87.0)
+                //.padding(.top, 200)
                 .frame(width: 200, height: 200)
-                //.padding(130)
+                
                 
                 }
+                
            
             VStack {
             Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
                 Text("Login")
                 .padding()
+                .font(.system(size: 28))
+                //.padding(.top, 75)
                 
             }
             Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
             Text("Sign Up")
                 .padding()
+                 .font(.system(size: 28))
         }
             }
             }
