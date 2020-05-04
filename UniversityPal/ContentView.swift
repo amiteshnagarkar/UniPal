@@ -13,7 +13,7 @@ struct ContentView: View {
         
         
         //TODO: Need to fix the constraints from splash to initial screen.
-        ZStack{
+        ZStack {
             Color(#colorLiteral(red: 0.3605145216, green: 0.3163693547, blue: 0.8708179593, alpha: 1)) .edgesIgnoringSafeArea(.all)
             
             VStack {
@@ -29,20 +29,15 @@ struct ContentView: View {
                 }
                 
            
-            VStack {
-            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+            VStack { Button(action:) {
                 Text("Login")
                 .padding()
                 .font(.system(size: 28))
                 //.padding(.top, 75)
                 
             }
-            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
-            Text("Sign Up")
-                .padding()
-                 .font(.system(size: 28))
-        }
-            }
+                
+                }
             }
            
             
@@ -50,8 +45,6 @@ struct ContentView: View {
                         }
 
                             }
-
-
 
 
 

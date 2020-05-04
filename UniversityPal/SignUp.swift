@@ -20,6 +20,9 @@ struct SignUpView: View{
     Group {
         if (session.session != nil) {
             Text ("Welcome back")
+            Button(action: session.signOut) {
+                    Text("Sign Out")
+            }
     }   else {
             Text("Show Auth Screen")
             }
