@@ -30,7 +30,7 @@ struct SignInView: View{
     
     var body: some View {
         VStack {
-            Text("Welcome back!")
+            Text("UniPal Sign in Portal")
                 .font(.system(size: 32, weight: .heavy))
             
             Text ("Sign in to continue")
@@ -60,8 +60,7 @@ struct SignInView: View{
                     .frame(height: 50)
                     .foregroundColor(.white)
                     .font(.system(size: 14, weight: .bold))
-                    .background(LinearGradient(gradient: Gradient(colors: [Color("bg1"),
-                            Color("bg2")]), startPoint: .leading, endPoint: .trailing))
+                    .background(LinearGradient(gradient: Gradient(colors: [Color(.purple), Color(.clear)]), startPoint: .leading, endPoint: .trailing))
                 .cornerRadius(5)
                 
             }
@@ -83,7 +82,7 @@ struct SignInView: View{
                     
                     Text("Create an account")
                         .font(.system(size: 14, weight: .semibold))
-                        .foregroundColor(Color ("bg2"))
+                        .foregroundColor(Color (.purple))
                 }
             }
                 
@@ -114,10 +113,11 @@ struct SigningUpView: View {
         VStack {
             Text("Create Account")
                 .font(.system(size: 32, weight: .heavy))
+                .foregroundColor(Color(.purple))
             
             Text("Sign Up to get started")
             .font(.system(size: 18, weight: .medium))
-            .foregroundColor(Color("Gray"))
+                .foregroundColor(Color(.purple))
             
             VStack(spacing:18) {
                 
@@ -140,7 +140,7 @@ struct SigningUpView: View {
                     .frame(height: 50)
                     .foregroundColor(.white)
                     .font(.system(size: 14, weight: .bold))
-                    .background(LinearGradient(gradient: Gradient(colors: [Color("bg1"), Color("bg2")]), startPoint: .leading, endPoint: .trailing))
+                    .background(LinearGradient(gradient: Gradient(colors: [Color(.purple), Color(.clear)]), startPoint: .leading, endPoint: .trailing))
                 .cornerRadius(5)
             }
             
