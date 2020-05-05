@@ -7,15 +7,19 @@
 //
 
 //Sign In View
+
 import SwiftUI
 
+//using @state to watch the property for changes
 struct SignInView: View{
     @State var email: String = ""
     @State var password: String = ""
     @State var error: String = ""
+    //@environmentobject will let me share variable 'session' of type 'StoreSession' anywhere.
     @EnvironmentObject var session: StoreSession
     
-    
+    //this function is only checking & storing the sign info
+    //TODO: make this func go to SignUpView struct in SignUp.swift file after self....??
     func signIn(){
         session.signIn(email: email, password: password) { (result, error) in
             if let error = error {
@@ -97,6 +101,8 @@ struct SigningUpView: View {
     @State var error: String = ""
     @EnvironmentObject var session: StoreSession
     
+    
+    //TODO: this function also just checks if email and password correct etc but doesnt direct??
     func signUp() {
         session.signUp(email: email, password: password) { (result, error) in
             if let error = error {
