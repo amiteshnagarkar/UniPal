@@ -2,12 +2,14 @@
 //  SignUp.swift
 //  UniversityPal
 //
-//  Created by Amitesh Nagarkar on 04/05/2020.
+//  Created by Amitesh Nagarkar on 06/05/2020.
 //  Copyright © 2020 Amitesh Nagarkar. All rights reserved.
 //
 
-//my contentview file
+import Foundation
+import SwiftUI
 
+//my contentview file
 import SwiftUI
 
 
