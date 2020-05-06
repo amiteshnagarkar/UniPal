@@ -7,6 +7,7 @@
 //
 
 //my contentview file
+
 import SwiftUI
 
 
@@ -25,7 +26,7 @@ struct SignUpView: View{
                     Text("Sign Out")
             }
     }   else {
-            Text("Show Auth Screen")
+            AuthView()
             }
         }.onAppear(perform: getUser)
     }
