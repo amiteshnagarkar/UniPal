@@ -39,6 +39,27 @@ struct SignUpView: View{
                 .cornerRadius(5)
             }
             
+          NavigationView {
+                    VStack {
+                            /*Text("Enter Home")
+                                .frame(minWidth: 0, maxWidth: .infinity)
+                                .frame(height: 50)
+                                .foregroundColor(.white)
+                                .font(.system(size: 14, weight: .bold))
+                                .background(LinearGradient(gradient: Gradient(colors: [Color(.purple), Color(.clear)]), startPoint: .leading, endPoint: .trailing))
+                            .cornerRadius(5) */
+                                NavigationLink(destination: Home()) {
+                                //Text("Enter Home")
+                                    Text("Do Something")
+                                    
+                                
+                        }
+                    }
+                }
+        
+            
+            
+            
     }   else {
             AuthView()
             }
@@ -49,6 +70,7 @@ struct SignUpView: View{
 
 func sendEmail() {
     //Text("tesst")
+    //TODO: add extra checks and remove the yellow error below..
     let user = Auth.auth().currentUser
     Auth.auth().currentUser?.sendEmailVerification { (error) in
           
