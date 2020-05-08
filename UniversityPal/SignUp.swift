@@ -15,14 +15,19 @@ import SwiftUI
 
 struct SignUpView: View{
     @EnvironmentObject var session: StoreSession
+    @State private var showingSheet = false
     
     func getUser() {
         session.listen()
     }
     
     var body:some View{
-    Group {
+        
+    /*Group*/ VStack {
         if (session.session != nil) {
+            
+            VStack {
+                Spacer()
             Text ("Welcome back")
             Button(action: session.signOut) {
                     Text("Sign Out")
@@ -37,7 +42,14 @@ struct SignUpView: View{
                     .font(.system(size: 14, weight: .bold))
                     .background(LinearGradient(gradient: Gradient(colors: [Color(.purple), Color(.clear)]), startPoint: .leading, endPoint: .trailing))
                 .cornerRadius(5)
+                    .onTapGesture {
+                        self.showingSheet.toggle()
+                }
+                .sheet(isPresented: $showingSheet) {
+                    MapView()
+                }
             }
+                }
             
           NavigationView {
                     VStack {
@@ -50,11 +62,16 @@ struct SignUpView: View{
                             .cornerRadius(5) */
                                 NavigationLink(destination: Home()) {
                                 //Text("Enter Home")
-                                    Text("Do Something")
-                                    
-                                
-                        }
-                    }
+                                    Text("Go to home")
+                                    .onTapGesture {
+                                            self.showingSheet.toggle()
+                                    }
+                                    .sheet(isPresented: $showingSheet) {
+                                        MapView()
+                                    }
+                        } 
+                        //for some reason this padding isnt working, but will leave this for now..
+                        }.padding(.vertical,300)
                 }
         
             

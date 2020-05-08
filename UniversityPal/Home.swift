@@ -12,8 +12,10 @@ import SwiftUI
 struct Home: View {
     var body: some View {
         VStack {
-            Image("logonew")
+            //Image("logonew")
             //EmptyView()
+            MapView()
+                .frame(height:300)
         }
     }
 }
