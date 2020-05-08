@@ -46,7 +46,7 @@ struct SignUpView: View{
                         self.showingSheet.toggle()
                 }
                 .sheet(isPresented: $showingSheet) {
-                    MapView()
+                    Home()
                 }
             }
                 }
@@ -67,11 +67,11 @@ struct SignUpView: View{
                                             self.showingSheet.toggle()
                                     }
                                     .sheet(isPresented: $showingSheet) {
-                                        MapView()
+                                        Home()
                                     }
                         } 
                         //for some reason this padding isnt working, but will leave this for now..
-                        }.padding(.vertical,300)
+                        }//.padding(.vertical,300)
                 }
         
             

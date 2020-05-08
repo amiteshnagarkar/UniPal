@@ -14,9 +14,13 @@ struct Home: View {
         VStack {
             //Image("logonew")
             //EmptyView()
+            Spacer()
+                .frame(height: 5)
             MapView()
-                .frame(height:300)
-        }
+           // Text ("Hi")
+                .frame(width: 400, height: 390)
+            Spacer()
+        } //.frame(minWidth: 20, maxWidth: 20, minHeight: 20, maxHeight: 20, alignment: .topLeading)
     }
 }
 
