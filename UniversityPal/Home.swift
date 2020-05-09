@@ -8,19 +8,43 @@
 
 import Foundation
 import SwiftUI
+import CoreLocation
 
 struct Home: View {
+    @State private var centerCoordinate = CLLocationCoordinate2D()
     var body: some View {
+        
         VStack {
+            
             //Image("logonew")
             //EmptyView()
-            Spacer()
-                .frame(height: 5)
-            MapView()
+            //Spacer()
+                //.frame(height: 300)
+            MapView(centerCoordinate: $centerCoordinate)
            // Text ("Hi")
-                .frame(width: 400, height: 390)
+                //.frame(width: 400, height: 390)
+                
+            //Spacer()
+            
+            HStack{
+            Button(action: {
+                // your action here
+            }) {
+                Text("Buyer")
+            }
+            Button(action: {
+                // your action here
+            }) {
+                Text("Seller")
+            }
+            .padding()
+            }
+            //.frame(minWidth: 20, maxWidth: 20, minHeight: 20, maxHeight: 20, alignment: .topLeading)
+        
             Spacer()
-        } //.frame(minWidth: 20, maxWidth: 20, minHeight: 20, maxHeight: 20, alignment: .topLeading)
+            .frame(height: 350)
+    }
+    
     }
 }
 
