@@ -20,7 +20,8 @@ struct Home: View {
             //EmptyView()
             //Spacer()
                 //.frame(height: 300)
-            MapView(centerCoordinate: $centerCoordinate)
+            //MapView(centerCoordinate: $centerCoordinate)
+            MapViewer()
            // Text ("Hi")
                 //.frame(width: 400, height: 390)
                 
