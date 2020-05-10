@@ -3,9 +3,14 @@
 
 target 'UniversityPal' do
   # Comment the next line if you don't want to use dynamic frameworks
+
   use_frameworks!
 
-  # Pods for UniversityPal
-  pod 'Firebase/Analytics'
-  pod 'Firebase/Auth'
+# Pods for UniversityPal
+pod 'Firebase/Firestore'
+pod 'Firebase/Analytics'
+pod 'Firebase/Auth'
+pod 'Protobuf', :inhibit_warnings => true
+
+
 end

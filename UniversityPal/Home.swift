@@ -43,7 +43,7 @@ struct Home: View {
             //.frame(minWidth: 20, maxWidth: 20, minHeight: 20, maxHeight: 20, alignment: .topLeading)
         
             Spacer()
-            .frame(height: 350)
+            .frame(height: 200)
     }
     
     }
