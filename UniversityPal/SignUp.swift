@@ -16,6 +16,7 @@ import SwiftUI
 struct SignUpView: View{
     @EnvironmentObject var session: StoreSession
     @State private var showingSheet = false
+    //let emailId = StoreSession()
     
     func getUser() {
         session.listen()
@@ -28,7 +29,10 @@ struct SignUpView: View{
             
             VStack {
                 Spacer()
-            Text ("Welcome back")
+                //Text ("Welcome back \(emailId.email)")
+                //session.session!.email ?? "user"
+                //Text ("Welcome back \(emailId.session?.email ?? "user")")
+                Text ("Welcome back \(session.session!.email ?? "user")")
             Button(action: session.signOut) {
                     Text("Sign Out")
             }
