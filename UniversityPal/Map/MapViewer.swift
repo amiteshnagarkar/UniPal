@@ -75,8 +75,9 @@ struct mapView : UIViewRepresentable {
         manager.startUpdatingLocation()
         map.showsUserLocation = true
         //currently maps centres is this location
-        //let center = CLLocationCoordinate2D(latitude: 52.0406, longitude: 0.7594)
-        let center = CLLocationCoordinate2D(latitude: storeCoords() , longitude: 0.7594)
+        //hard coded centre to my location
+        let center = CLLocationCoordinate2D(latitude: 52.04456795273066, longitude: -0.6725990348528198)
+        //let center = CLLocationCoordinate2D(latitude: storeCoords() , longitude: 0.7594)
         let region = MKCoordinateRegion(center: center, latitudinalMeters: 1000, longitudinalMeters: 1000)
         
         //TODO: in centre use the intial coordinate.
@@ -104,34 +105,6 @@ struct mapView : UIViewRepresentable {
         
         }
         
-    }
-    
-    func storeCoords () -> Double {
-        
-        let db = Firestore.firestore()
-        //db.collection("locations").document("sharing").addSnapshotListener{ (snap, err)
-        self.db.collection("locations").document("sharing").collection("updates").getDocuments() { (querySnapshot, err) in
-                if let err = err {
-                //print ((err?.localizedDescription)!)
-                    print ("Error getting documents: \(err)")
-                } else {
-                    for document in querySnapshot!.documents {
-                        if let coords = document.get("Ami") {
-                            let point = coords as! GeoPoint
-                            let lat = point.latitude
-                            //let lon = point.longitude
-                            //print(lat)
-                            return lat
-                            
-                            
-                        }
-                        
-                    }
-                   
-            }
-       
-    }
-      
     }
     
     //coordinator is the delegate of the map view, which means when something interesting happens it gets notified.
@@ -175,13 +148,72 @@ struct mapView : UIViewRepresentable {
             
             //print (last?.coordinate.latitude)
                 }
+                
+                //this line is printing
                 print ("success")
+               // print (Utils.getCoordinates())
+                Utils.getCoordinates() { (lat) in
+                    print (lat)
+                    print("a")
+                    
+                }
+                
+               
+                //this line is printing
+                print ("hey")
+                
+               
         }
     }
     
 }
+    
 
 }
+
+
+class Utils {
+    
+    //this is a closure - as it gets stored as a variable
+    static func getCoordinates(completion: @escaping (Double)-> Void) {
+      
+    //var lat: Double
+    //var lon:Double = 0.0000
+        
+        
+    let db = Firestore.firestore()
+    //db.collection("updates").getDocuments() { (querySnapshot, err) in
+        db.collection("locations").document("sharing").collection("updates").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+           print("Error getting documents: \(err)")
+       } else {
+        
+                var lat: Double = 0.989
+            for document in querySnapshot!.documents {
+                if let coords = document.get("Ami") {
+                    let point = coords as! GeoPoint
+                    lat = point.latitude
+                    completion(lat)
+                    //lon = point.longitude
+                    //lat = 0.98289
+                    //lon = 0.98288
+                    //print(lat, lon)
+                    //print ("testtt")
+                    //print(lat)
+                    }
+                         }
+        
+       //return (lat)
+       
+            }
+   }
+}
+    
+    
+}
+
+
+
 
 class observer : ObservableObject {
     
