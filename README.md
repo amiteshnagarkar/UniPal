@@ -2,14 +2,13 @@
 > Not yet revealing the main use of the app; but allows local users to communicate with each other.
 
 [![Swift Version][swift-image]][swift-url]
-[![Build Status][travis-image]][travis-url]  
 [![Platform](https://img.shields.io/cocoapods/p/LFAlertController.svg?style=flat)](http://cocoapods.org/pods/LFAlertController)
 
 Here are some current screenshots:
 
-![](img3.jpg)
-![](img1.jpg)
-![](img2.jpg)
+![30%](img3.jpg)
+![30%](img1.jpg)
+![30%](img2.jpg)
 
 
 [swift-image]:https://img.shields.io/badge/swift-3.0-orange.svg
