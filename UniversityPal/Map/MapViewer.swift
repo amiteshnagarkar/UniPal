@@ -74,13 +74,11 @@ struct mapView : UIViewRepresentable {
         manager.delegate = context.coordinator
         manager.startUpdatingLocation()
         map.showsUserLocation = true
-        //currently maps centres is this location
-        //hard coded centre to my location
-        let center = CLLocationCoordinate2D(latitude: 52.04456795273066, longitude: -0.6725990348528198)
-        //let center = CLLocationCoordinate2D(latitude: storeCoords() , longitude: 0.7594)
+       //let center = CLLocationCoordinate2D(latitude: 52.04, longitude: -0.672)
+        //TODO: this produces a bug where user has to tap share location twice to see map
+        let center = CLLocationCoordinate2D(latitude: mapView.Coordinator.self.latitude!, longitude: mapView.Coordinator.self.longitude!)
         let region = MKCoordinateRegion(center: center, latitudinalMeters: 1000, longitudinalMeters: 1000)
         
-        //TODO: in centre use the intial coordinate.
         
         
         map.region = region
@@ -110,6 +108,9 @@ struct mapView : UIViewRepresentable {
     //coordinator is the delegate of the map view, which means when something interesting happens it gets notified.
     class Coordinator : NSObject, CLLocationManagerDelegate{
         
+        static var latitude:CLLocationDegrees? = 0.000
+        static var longitude:CLLocationDegrees? = 0.000
+
         //reference to the parent struct so it can pass data back up to SwiftUI
         var parent : mapView
         
@@ -145,72 +146,24 @@ struct mapView : UIViewRepresentable {
                     
                     print((err?.localizedDescription)!)
                     return
-            
-            //print (last?.coordinate.latitude)
                 }
                 
-                //this line is printing
-                print ("success")
-               // print (Utils.getCoordinates())
-                Utils.getCoordinates() { (lat) in
-                    print (lat)
-                    print("a")
-                    
-                }
+                //print(last?.coordinate.latitude)
+                //print(last?.coordinate.longitude)
+                mapView.Coordinator.self.longitude = last?.coordinate.longitude
+                mapView.Coordinator.self.latitude = last?.coordinate.latitude
                 
-               
-                //this line is printing
-                print ("hey")
                 
-               
-        }
+                
+                        }
     }
     
-}
-    
-
+        
 }
 
+}
 
-class Utils {
-    
-    //this is a closure - as it gets stored as a variable
-    static func getCoordinates(completion: @escaping (Double)-> Void) {
-      
-    //var lat: Double
-    //var lon:Double = 0.0000
-        
-        
-    let db = Firestore.firestore()
-    //db.collection("updates").getDocuments() { (querySnapshot, err) in
-        db.collection("locations").document("sharing").collection("updates").getDocuments() { (querySnapshot, err) in
-            if let err = err {
-           print("Error getting documents: \(err)")
-       } else {
-        
-                var lat: Double = 0.989
-            for document in querySnapshot!.documents {
-                if let coords = document.get("Ami") {
-                    let point = coords as! GeoPoint
-                    lat = point.latitude
-                    completion(lat)
-                    //lon = point.longitude
-                    //lat = 0.98289
-                    //lon = 0.98288
-                    //print(lat, lon)
-                    //print ("testtt")
-                    //print(lat)
-                    }
-                         }
-        
-       //return (lat)
-       
-            }
-   }
-}
-    
-    
-}
+
 
 
 
