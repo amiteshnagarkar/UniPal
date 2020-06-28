@@ -51,6 +51,8 @@ struct MapViewer_Previews: PreviewProvider {
 }
 
 //UIViewRepresentable; A wrapper for a UIKit view that you use to integrate that view into your SwiftUI view hierarchy.
+
+//STRUCT
 struct mapView : UIViewRepresentable {
 
     var name = ""
@@ -58,6 +60,8 @@ struct mapView : UIViewRepresentable {
     
     //creates the custom instance that we use to communicate changes from our view controller to other parts of your SwiftUI interface.
     //called before makeUIView()
+    
+    //FUNCTION
     func makeCoordinator() -> mapView.Coordinator {
         return mapView.Coordinator(parent1: self)
     }
@@ -68,6 +72,8 @@ struct mapView : UIViewRepresentable {
     let manager = CLLocationManager()
     
     //can make annotations in this method using MKPointAnnotation()
+    
+    //FUNCTION
     func makeUIView(context: UIViewRepresentableContext<mapView>) -> MKMapView{
         
         //connect coordinator MKMapView
@@ -83,9 +89,14 @@ struct mapView : UIViewRepresentable {
         
         map.region = region
         manager.requestWhenInUseAuthorization()
+        
+        
+        
         return map
     }
     
+    
+    //FUNCTION
     func updateUIView(_ uiView: MKMapView, context: UIViewRepresentableContext<mapView>) {
         
         for i in geopoints {
@@ -105,6 +116,7 @@ struct mapView : UIViewRepresentable {
         
     }
     
+    //CLASS
     //coordinator is the delegate of the map view, which means when something interesting happens it gets notified.
     class Coordinator : NSObject, CLLocationManagerDelegate{
         
@@ -115,9 +127,10 @@ struct mapView : UIViewRepresentable {
         var parent : mapView
         
         init(parent1 : mapView) {
-            parent = parent1
+            self.parent = parent1
         }
         
+        //FUNCTION
         func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
             
             if status == .denied {
@@ -131,7 +144,7 @@ struct mapView : UIViewRepresentable {
             }
         }
         
-        
+        //FUNCTION
         func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
             
             let last = locations.last
@@ -153,8 +166,6 @@ struct mapView : UIViewRepresentable {
                 mapView.Coordinator.self.longitude = last?.coordinate.longitude
                 mapView.Coordinator.self.latitude = last?.coordinate.latitude
                 
-                
-                
                         }
     }
     
@@ -167,7 +178,7 @@ struct mapView : UIViewRepresentable {
 
 
 
-
+//CLASS
 class observer : ObservableObject {
     
     @Published var data = [String:Any]()
