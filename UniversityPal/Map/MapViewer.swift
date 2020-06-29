@@ -183,7 +183,9 @@ struct mapView : UIViewRepresentable {
                         }
     }
         
-        
+        //TODO: Looks like need to put this into an extension of some sort somehow..
+        //One way to configure the annotation view is to implement the map view’s mapView(_:viewFor:) delegate method. Your job in this delegate method is to return an instance of MKAnnotationView to present as a visual indicator of the annotation.
+        //this is not appearing when clicked..
         func mapView_return_MKAnnotationView( _ mapView: MKMapView, viewFor annotation: MKAnnotation ) -> MKAnnotationView? {
                // 2
                guard let annotation = annotation as? Artwork else {
