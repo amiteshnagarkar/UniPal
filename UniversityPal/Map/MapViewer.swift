@@ -11,6 +11,8 @@ import Firebase
 import CoreLocation
 import MapKit
 
+//for the bit where user enters name
+//STRUCT
 struct MapViewer: View {
     
     //hands control over to SwiftUI so that it remains persistent in memory for as long as the view exists.
@@ -73,22 +75,33 @@ struct mapView : UIViewRepresentable {
     
     //can make annotations in this method using MKPointAnnotation()
     
+    
+    //make chnages to this so view provides users and their locations tappable etc
     //FUNCTION
     func makeUIView(context: UIViewRepresentableContext<mapView>) -> MKMapView{
         
-        //connect coordinator MKMapView
+        map.delegate = context.coordinator
+        //shows the user location
         manager.delegate = context.coordinator
         manager.startUpdatingLocation()
         map.showsUserLocation = true
        //let center = CLLocationCoordinate2D(latitude: 52.04, longitude: -0.672)
         //TODO: this produces a bug where user has to tap share location twice to see map
-        let center = CLLocationCoordinate2D(latitude: mapView.Coordinator.self.latitude!, longitude: mapView.Coordinator.self.longitude!)
+        let center = CLLocationCoordinate2D(latitude: 52.04 , longitude: -0.672 )
         let region = MKCoordinateRegion(center: center, latitudinalMeters: 1000, longitudinalMeters: 1000)
-        
-        
         
         map.region = region
         manager.requestWhenInUseAuthorization()
+        
+        
+        // Show artwork on map
+               let artwork = Artwork(
+                 title: "King David Kalakaua",
+                 locationName: "Waikiki Gateway Park",
+                 discipline: "Sculpture",
+                 coordinate: CLLocationCoordinate2D(latitude: 52.045561, longitude: -0.675869))
+               //mapView.addAnnotation(artwork)
+               map.addAnnotation(artwork)
         
         
         
@@ -118,14 +131,13 @@ struct mapView : UIViewRepresentable {
     
     //CLASS
     //coordinator is the delegate of the map view, which means when something interesting happens it gets notified.
-    class Coordinator : NSObject, CLLocationManagerDelegate{
+    class Coordinator : NSObject, CLLocationManagerDelegate, MKMapViewDelegate {
         
         static var latitude:CLLocationDegrees? = 0.000
         static var longitude:CLLocationDegrees? = 0.000
 
         //reference to the parent struct so it can pass data back up to SwiftUI
         var parent : mapView
-        
         init(parent1 : mapView) {
             self.parent = parent1
         }
@@ -163,11 +175,52 @@ struct mapView : UIViewRepresentable {
                 
                 //print(last?.coordinate.latitude)
                 //print(last?.coordinate.longitude)
-                mapView.Coordinator.self.longitude = last?.coordinate.longitude
-                mapView.Coordinator.self.latitude = last?.coordinate.latitude
+                
+                //TODO: Crashes program for the centre coords
+                //mapView.Coordinator.self.longitude = last?.coordinate.longitude
+                //mapView.Coordinator.self.latitude = last?.coordinate.latitude
                 
                         }
     }
+        
+        
+        func mapView_return_MKAnnotationView( _ mapView: MKMapView, viewFor annotation: MKAnnotation ) -> MKAnnotationView? {
+               // 2
+               guard let annotation = annotation as? Artwork else {
+                 return nil
+               }
+               // 3
+               let identifier = "artwork"
+               var view: MKMarkerAnnotationView
+               // 4
+               if let dequeuedView = mapView.dequeueReusableAnnotationView(
+                 withIdentifier: identifier) as? MKMarkerAnnotationView {
+                 dequeuedView.annotation = annotation
+                 view = dequeuedView
+               } else {
+                 // 5
+                 view = MKMarkerAnnotationView(
+                   annotation: annotation,
+                   reuseIdentifier: identifier)
+                 view.canShowCallout = true
+                 view.calloutOffset = CGPoint(x: -5, y: 5)
+                 view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+               }
+               return view
+             }
+        
+        
+        
+        func mapView_return_MKAnnotationView( _ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+          
+            guard let artwork = view.annotation as? Artwork else {
+            return
+          }
+
+          let launchOptions = [ MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
+          artwork.mapItem?.openInMaps(launchOptions: launchOptions)
+        }
+
     
         
 }
